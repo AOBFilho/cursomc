@@ -1,10 +1,8 @@
 package com.aobfilho.cursomc.resources;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,10 +22,10 @@ public class CategoriaResource {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> listar(@PathVariable Integer id) {
-		Categoria cat = categoriaService.buscar(id);
-		if (cat == null) {
+		Optional<Categoria> cat = categoriaService.buscar(id);
+		if (!cat.isPresent()) {
 			return ResponseEntity.noContent().build();
 		};
-		return ResponseEntity.ok().body(cat);
+		return ResponseEntity.ok().body(cat.get());
 	}
 }
