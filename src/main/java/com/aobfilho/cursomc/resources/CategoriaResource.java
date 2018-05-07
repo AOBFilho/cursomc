@@ -1,7 +1,5 @@
 package com.aobfilho.cursomc.resources;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +20,7 @@ public class CategoriaResource {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> listar(@PathVariable Integer id) {
-		Optional<Categoria> cat = categoriaService.buscar(id);
-		if (!cat.isPresent()) {
-			return ResponseEntity.noContent().build();
-		};
-		return ResponseEntity.ok().body(cat.get());
+		Categoria cat = categoriaService.buscar(id);
+		return ResponseEntity.ok().body(cat);		
 	}
 }
