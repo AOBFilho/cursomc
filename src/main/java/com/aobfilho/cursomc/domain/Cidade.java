@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 public class Cidade implements Serializable{
 
@@ -21,7 +23,6 @@ public class Cidade implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="estado_id")
 	private Estado estado;
