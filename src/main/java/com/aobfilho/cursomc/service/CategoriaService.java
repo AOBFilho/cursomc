@@ -1,5 +1,6 @@
 package com.aobfilho.cursomc.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,9 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possível deletar categoria que possua produto!");
 		}
 		
+	}
+
+	public List<Categoria> findAll() {
+		return categoriaRepository.findAll();
 	}
 }
