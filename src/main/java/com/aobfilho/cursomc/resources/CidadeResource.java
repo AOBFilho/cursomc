@@ -19,8 +19,8 @@ public class CidadeResource {
 	
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> listar(@PathVariable Integer id) {
-		Cidade cat = cidadeService.buscar(id);
-		return ResponseEntity.ok().body(cat);		
+	public ResponseEntity<Cidade> listar(@PathVariable Integer id) {
+		Cidade cidade = cidadeService.find(id);
+		return ResponseEntity.ok().body(cidade);		
 	}
 }

@@ -18,7 +18,7 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
-	public PedidoDTO buscar(Integer id) {
+	public PedidoDTO find(Integer id) {
 		Optional<Pedido> obj = pedidoRepository.findById(id);
 
 		if (!obj.isPresent()) {

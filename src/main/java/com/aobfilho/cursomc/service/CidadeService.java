@@ -15,7 +15,7 @@ public class CidadeService {
 	@Autowired
 	private CidadeRepository cidadeRepository;
 	
-	public Cidade buscar(Integer id) {
+	public Cidade find(Integer id) {
 		Optional<Cidade> obj = cidadeRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: "+id+
 				", Tipo: "+Cidade.class.getName()));
