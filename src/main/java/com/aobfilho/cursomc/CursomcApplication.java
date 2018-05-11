@@ -57,6 +57,11 @@ public class CursomcApplication implements CommandLineRunner{
 	
 	private Categoria cat1;
 	private Categoria cat2;
+	private Categoria cat3;
+	private Categoria cat4;
+	private Categoria cat5;
+	private Categoria cat6;
+	private Categoria cat7;
 	private Produto p1;
 	private Produto p2;
 	private Produto p3;
@@ -93,6 +98,13 @@ public class CursomcApplication implements CommandLineRunner{
 	private void adicionarCategoriaProduto() {
 		cat1 = new Categoria(null,"Informática");
 		cat2 = new Categoria(null,"Escritório");
+		cat3 = new Categoria(null,"Cama, mesa e banho");
+		cat4 = new Categoria(null,"Eletrônicos");
+		cat5 = new Categoria(null,"Jardinagem");
+		cat6 = new Categoria(null,"Decoração");
+		cat7 = new Categoria(null,"Perfumaria");
+
+		
 		p1 = new Produto(null,"Computador",BigDecimal.valueOf(2000.00));
 		p2 = new Produto(null,"Impressora",BigDecimal.valueOf(800.00));
 		p3 = new Produto(null,"Mouse",BigDecimal.valueOf(80.00));
@@ -104,7 +116,7 @@ public class CursomcApplication implements CommandLineRunner{
 		p2.getCategorias().addAll(Arrays.asList(cat1,cat2));
 		p3.getCategorias().add(cat1);
 		
-		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
 	}
 	
