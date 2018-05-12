@@ -27,7 +27,7 @@ public class PedidoService {
 		
 		Pedido ped = obj.get();
 		Cliente cli = ped.getCliente();
-		ClienteDTO clienteDTO = new ClienteDTO(cli.getId(), cli.getNome(),cli.getEmail(), cli.getCpfOuCnpj(), cli.getTipo().getCodigo(),cli.getTelefones());
+		ClienteDTO clienteDTO = new ClienteDTO(cli);
 		PedidoDTO pedDTO = new PedidoDTO(ped.getId(), ped.getInstante(), ped.getPagamento(),clienteDTO, ped.getEnderecoDeEntrega(), ped.getItens());
 
 		return pedDTO;
