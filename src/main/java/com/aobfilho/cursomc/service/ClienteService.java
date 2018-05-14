@@ -46,7 +46,6 @@ public class ClienteService {
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível deletar pois existem entidades relacionadas!");
 		}
-		
 	}
 
 	public List<Cliente> findAll() {
