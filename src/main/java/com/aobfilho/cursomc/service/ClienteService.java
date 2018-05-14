@@ -56,7 +56,7 @@ public class ClienteService {
 			clienteRepository.deleteById(id);	
 		}
 		catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível deletar pois existem entidades relacionadas!");
+			throw new DataIntegrityException("Não é possível deletar pois existem pedidos relacionadas!");
 		}
 	}
 
