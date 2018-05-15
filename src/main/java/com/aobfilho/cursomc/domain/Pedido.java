@@ -1,6 +1,7 @@
 package com.aobfilho.cursomc.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -52,6 +53,10 @@ public class Pedido implements Serializable{
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
 
+	public BigDecimal getValorTotal() {
+		return itens.stream().map(obj -> obj.getSubTotal()).reduce((x,y) -> x.add(y)).get();
+	}
+	
 	public Integer getId() {
 		return id;
 	}

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aobfilho.cursomc.dto.PedidoDTO;
+import com.aobfilho.cursomc.domain.Pedido;
 import com.aobfilho.cursomc.service.PedidoService;
 
 @RestController
@@ -19,8 +19,8 @@ public class PedidoResource {
 	
 
 	@GetMapping("/{id}")
-	public ResponseEntity<PedidoDTO> listar(@PathVariable Integer id) {
-		PedidoDTO pedido = pedidoService.find(id);
+	public ResponseEntity<Pedido> listar(@PathVariable Integer id) {
+		Pedido pedido = pedidoService.find(id);
 		return ResponseEntity.ok().body(pedido);		
 	}
 }
