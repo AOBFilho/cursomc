@@ -55,29 +55,6 @@ public class CursomcApplication implements CommandLineRunner{
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
-	private Categoria cat1;
-	private Categoria cat2;
-	private Categoria cat3;
-	private Categoria cat4;
-	private Categoria cat5;
-	private Categoria cat6;
-	private Categoria cat7;
-	private Produto p1;
-	private Produto p2;
-	private Produto p3;
-	private Estado est1;
-	private Estado est2;
-	private Cidade c1;
-	private Cidade c2;
-	private Cidade c3;
-	private Cliente cli1;
-	private Endereco e1;
-	private Endereco e2;
-	private Pedido ped1;
-	private Pedido ped2;
-	private Pagamento pagto1;
-	private Pagamento pagto2;
-	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
 	}
@@ -88,74 +65,84 @@ public class CursomcApplication implements CommandLineRunner{
 	}
 
 	private void adicionarDadosDeTeste() {
-		adicionarCategoriaProduto();
-		adicionarEstadoCidade();
-		adiconarClienteEndereco();
-		adicionarPedidoPagamento();
-		adicionarItemPedido();
-	}	
-	
-	private void adicionarCategoriaProduto() {
-		cat1 = new Categoria(null,"Informática");
-		cat2 = new Categoria(null,"Escritório");
-		cat3 = new Categoria(null,"Cama, mesa e banho");
-		cat4 = new Categoria(null,"Eletrônicos");
-		cat5 = new Categoria(null,"Jardinagem");
-		cat6 = new Categoria(null,"Decoração");
-		cat7 = new Categoria(null,"Perfumaria");
+		Categoria cat1 = new Categoria(null,"Informática");
+		Categoria cat2 = new Categoria(null,"Escritório");
+		Categoria cat3 = new Categoria(null,"Cama, mesa e banho");
+		Categoria cat4 = new Categoria(null,"Eletrônicos");
+		Categoria cat5 = new Categoria(null,"Jardinagem");
+		Categoria cat6 = new Categoria(null,"Decoração");
+		Categoria cat7 = new Categoria(null,"Perfumaria");
 
 		
-		p1 = new Produto(null,"Computador",BigDecimal.valueOf(2000.00));
-		p2 = new Produto(null,"Impressora",BigDecimal.valueOf(800.00));
-		p3 = new Produto(null,"Mouse",BigDecimal.valueOf(80.00));
+		Produto p1 = new Produto(null,"Computador",BigDecimal.valueOf(2000.00));
+		Produto p2 = new Produto(null,"Impressora",BigDecimal.valueOf(800.00));
+		Produto p3 = new Produto(null,"Mouse",BigDecimal.valueOf(80.00));
+		Produto p4 = new Produto(null,"Mesa de escritorio",BigDecimal.valueOf(300.00));
+		Produto p5 = new Produto(null,"Toalha",BigDecimal.valueOf(50.00));
 		
-		cat1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
-		cat2.getProdutos().addAll(Arrays.asList(p2));
+		Produto p6 = new Produto(null,"Colcha",BigDecimal.valueOf(200.00));
+		Produto p7 = new Produto(null,"TV true color",BigDecimal.valueOf(1200.00));
+		Produto p8 = new Produto(null,"Rocadeira",BigDecimal.valueOf(800.00));
+		Produto p9 = new Produto(null,"Abajour",BigDecimal.valueOf(100.00));
+		Produto p10 = new Produto(null,"Pendente",BigDecimal.valueOf(180.00));
+		Produto p11 = new Produto(null,"Shampoo",BigDecimal.valueOf(90.00));
 		
-		p1.getCategorias().add(cat1);
-		p2.getCategorias().addAll(Arrays.asList(cat1,cat2));
-		p3.getCategorias().add(cat1);
+		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
+		cat2.getProdutos().addAll(Arrays.asList(p2, p4));
+		cat3.getProdutos().addAll(Arrays.asList(p5, p6));
+		cat4.getProdutos().addAll(Arrays.asList(p1, p2, p3, p7));
+		cat5.getProdutos().addAll(Arrays.asList(p8));
+		cat6.getProdutos().addAll(Arrays.asList(p9, p10));
+		cat7.getProdutos().addAll(Arrays.asList(p11));
+		
+		p1.getCategorias().addAll(Arrays.asList(cat1, cat4));
+		p2.getCategorias().addAll(Arrays.asList(cat1, cat2, cat4));
+		p3.getCategorias().addAll(Arrays.asList(cat1, cat4));
+		p4.getCategorias().add(cat2);
+		p5.getCategorias().add(cat3);
+		p6.getCategorias().add(cat3);
+		p7.getCategorias().add(cat4);
+		p8.getCategorias().add(cat5);
+		p9.getCategorias().add(cat6);
+		p10.getCategorias().add(cat6);
+		p11.getCategorias().add(cat7);
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
-		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
-	}
-	
-	private void adicionarEstadoCidade() {
-		est1 = new Estado(null,"Minas Gerais");
-		est2 = new Estado(null,"São Paulo");
+		produtoRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11));
 		
-		c1 = new Cidade(null,"Uberlândia",est1);
-		c2 = new Cidade(null,"São Paulo",est2);
-		c3 = new Cidade(null,"Campinas",est2);
+		Estado est1 = new Estado(null,"Minas Gerais");
+		Estado est2 = new Estado(null,"São Paulo");
+		
+		Cidade c1 = new Cidade(null,"Uberlândia",est1);
+		Cidade c2 = new Cidade(null,"São Paulo",est2);
+		Cidade c3 = new Cidade(null,"Campinas",est2);
 		
 		est1.getCidades().add(c1);
 		est2.getCidades().addAll(Arrays.asList(c2,c3));
 		
 		estadoRepository.saveAll(Arrays.asList(est1,est2));
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));		
-	}	
-	
-	private void adiconarClienteEndereco() {
-		cli1 = new Cliente(null,"Maria Silva","maria@gmail.com","36378912377",TipoCliente.PESSOAFISICA);
+
+		Cliente cli1 = new Cliente(null,"Maria Silva","maria@gmail.com","36378912377",TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(Arrays.asList("27363323","93838393"));
-		e1 = new Endereco(null,"Rua Flores","300","Apto 203","Jardim","38220834",cli1,c1);
-		e2 = new Endereco(null,"Avenida Matos","105","Sala 800","Centro","38777012",cli1,c2);
+		Endereco e1 = new Endereco(null,"Rua Flores","300","Apto 203","Jardim","38220834",cli1,c1);
+		Endereco e2 = new Endereco(null,"Avenida Matos","105","Sala 800","Centro","38777012",cli1,c2);
 		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
 		
 		clienteRepository.save(cli1);
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
-	}
-	
-	private void adicionarPedidoPagamento() {
+
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
+		Pedido ped1 = null;
+		Pedido ped2 = null;
 		try {			
 			ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
 			ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, e2);
 			
-			pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+			Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 			ped1.setPagamento(pagto1);
-			pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
+			Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
 			ped2.setPagamento(pagto2);
 			
 			cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
@@ -167,9 +154,6 @@ public class CursomcApplication implements CommandLineRunner{
 			e.printStackTrace();
 		}
 
-	}
-	
-	private void adicionarItemPedido() {
 		ItemPedido ip1 = new ItemPedido(ped1, p1, BigDecimal.valueOf(0.00), BigDecimal.valueOf(1), BigDecimal.valueOf(2000.00));
 		ItemPedido ip2 = new ItemPedido(ped1, p3, BigDecimal.valueOf(0.00), BigDecimal.valueOf(2), BigDecimal.valueOf(80.00));
 		ItemPedido ip3 = new ItemPedido(ped2, p2, BigDecimal.valueOf(100.00), BigDecimal.valueOf(1), BigDecimal.valueOf(800.00));
@@ -182,6 +166,7 @@ public class CursomcApplication implements CommandLineRunner{
 		p3.getItens().addAll(Arrays.asList(ip2));
 		
 		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
-	}
+
+	}	
 	
 }
