@@ -15,6 +15,7 @@ import com.aobfilho.cursomc.domain.enums.EstadoPagamento;
 import com.aobfilho.cursomc.repositories.ItemPedidoRepository;
 import com.aobfilho.cursomc.repositories.PagamentoRepository;
 import com.aobfilho.cursomc.repositories.PedidoRepository;
+import com.aobfilho.cursomc.service.email.EmailService;
 import com.aobfilho.cursomc.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -37,6 +38,9 @@ public class PedidoService {
 	
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	public Pedido find(Integer id) {
 		Optional<Pedido> obj = pedidoRepository.findById(id);
@@ -69,7 +73,7 @@ public class PedidoService {
 		}
 		
 		itemPedidoRepository.saveAll(obj.getItens());
-		System.out.println(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
 }
