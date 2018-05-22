@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 import com.aobfilho.cursomc.service.DBService;
 import com.aobfilho.cursomc.service.email.EmailService;
@@ -14,6 +16,7 @@ import com.aobfilho.cursomc.service.email.SmtpEmailService;
 
 @Configuration
 @Profile("dev")
+@PropertySource({"file://${HOME}/cursomc-mail.properties"})
 public class DevConfig {
 
 	@Autowired
@@ -21,6 +24,9 @@ public class DevConfig {
 	
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String strategy;
+	
+	@Autowired
+	private Environment env;
 	
 	@Bean
 	public boolean instantiateDatabase() throws ParseException {
@@ -33,6 +39,8 @@ public class DevConfig {
 	
 	@Bean
 	public EmailService emailService() {
+		System.setProperty("spring.mail.username", env.getProperty("username"));
+		System.setProperty("spring.mail.password", env.getProperty("password"));
 		return new SmtpEmailService();
 	}
 }
