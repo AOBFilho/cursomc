@@ -1,5 +1,6 @@
 package com.aobfilho.cursomc.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,9 @@ public class CidadeService {
 		Optional<Cidade> obj = cidadeRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: "+id+
 				", Tipo: "+Cidade.class.getName()));
+	}
+	
+	public List<Cidade> findByEstado(Integer estado_id){
+		return cidadeRepository.findCidades(estado_id);
 	}
 }
